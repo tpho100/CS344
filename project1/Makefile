@@ -1,10 +1,10 @@
 all:	CS344_Project1_Test
 
-CS344_Project1_Test: test.o Integer.o
-	g++ -std=c++11 test.o Integer.o -o CS344_Project1_Test
+CS344_Project1_Test: sort_example.o Integer.o
+	g++ -std=c++11 sort_example.o Integer.o -o CS344_Project1_Test
 
-main.o: test.cpp
-	g++ -std=c++11 test.cpp
+main.o: sort_example.cpp
+	g++ -std=c++11 sort_example.cpp
 
 clean:
 	rm -rf *.o *.gch

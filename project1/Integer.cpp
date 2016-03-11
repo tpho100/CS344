@@ -19,4 +19,14 @@ bool Integer::operator<(const Integer& i)
 	}
 	return false;
 }
+
+bool Integer::operator<=(const Integer& i)
+{
+	count++;
+	if(value <= i.value)
+	{
+		return true;
+	}
+	return false;
+}
 		

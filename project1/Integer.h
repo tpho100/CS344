@@ -14,6 +14,8 @@ class Integer
 
 		//member operators
 		bool operator<(const Integer &i);
+		bool operator<=(const Integer &i);
+
 	private:
 		int value, count;
 };

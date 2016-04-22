@@ -2,11 +2,96 @@
 #define _MAP_H_
 
 #include "BST.h"
+#include <utility>
 
-template <class K, class V>
+template<typename K,typename V>
 class Map {
 	private:
-		BST<K,V> binarySearchTree = BST<K,V>();
+		BST<K,V> bst;
+		int SIZE;
+		
+	public:
+		Map<K,V>(){//default constructor
+			bst = BST<K,V>();
+			SIZE = 0;
+		}
+			
+		Map<K,V>(Map<K,V> & map){ //copy constructor
+			this->bst = map.getBST();
+			this->SIZE = map.size();
+		}
+
+		Map<K,V> & operator=(Map<K,V> & temp){
+			if(this != &temp){
+				this->bst = temp.getBST();
+				this->SIZE = temp.size();
+			}
+			return *this;
+		}
+		
+		~Map<K,V>(){ //destructor
+			//I have no dynamic memory allocation going on...
+		}
+		
+		BST<K,V> getBST(){
+			return bst;
+		}
+		
+		int size(){
+			return SIZE;
+		}
+		
+		bool empty(){
+			if(SIZE > 0){
+				return false;
+			}
+			return true;
+		}
+		
+		Node<K,V>* begin(){ //Returns node to first element which is the lowest key
+			return bst.tree_minimum(bst.root);
+		}
+		
+		Node<K,V>* end(){
+			return bst.tree_maximum(bst.root); //max is always at the end
+		}
+		
+		size_t count(K key){
+			Node<K,V> *temp = bst.tree_search(bst.root,key);
+			if(temp != NULL){
+				return 1;
+			} else {
+				return 0;
+			}
+		} 
+		
+		bool insert(pair<K,V> pair){
+			K key = pair.first;
+			V value = pair.second;
+			Node<K,V> *temp = new Node<K,V>(key,value);
+			Node<K,V> *temp2 = bst.tree_search(bst.root,key);
+
+			if(temp2 != NULL){
+				//found duplicate key, not inserting
+				return false;
+			} else {
+				bst.tree_insert(temp);
+				SIZE++;
+				return true;
+			}	
+		}
+		
+		size_t erase(K key){
+			Node<K,V> *temp = bst.tree_search(bst.root,key); //Search for the node with key key
+			if( temp != NULL){ //if it is not null, it's in the tree
+				bst.tree_delete(temp); //Delete that node
+				SIZE--;
+				return 1; //was deleted
+			} else {
+				return 0; //NULL so node was not in the tree
+			}
+			
+		}
 };
 
 #endif

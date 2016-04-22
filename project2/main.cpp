@@ -1,30 +1,32 @@
 #include "Map.h"
-#include "BST.h"
 #include <iostream>
+#include <utility>
 
 using namespace std;
 
 int main(){
-	Node<int,int> *a = new Node<int,int>(45,50);
-	Node<int,int> *b = new Node<int,int>(24,66);
-	Node<int,int> *c = new Node<int,int>(33,99);
-	Node<int,int> *d = new Node<int,int>(99,99);
-	Node<int,int> *e = new Node<int,int>(100,99);
 
-	Node<int,int> *yy = new Node<int,int>(26,99);
-	Node<int,int> *xx = new Node<int,int>(75,99);
-
-	BST<int,int> t = BST<int,int>();
-	t.tree_insert(a);
-	t.tree_insert(b);
-	t.tree_insert(c);
-	t.tree_insert(d);
-	t.tree_insert(e);
+	Map<int,int> map;
+	map.insert(make_pair(10, 1)); //INSERT TEST
+	map.insert(make_pair(11, 1));
+	map.insert(make_pair(12, 1));
+	map.insert(make_pair(13, 1));
+	cout << "MAPSIZE: " << map.size() << endl; //SIZE TEST
+	cout << "COUNTING NODES WITH KEY:  12" << map.count(12) << endl; //COUNT TEST
+	map.erase(12);			//ERASE TEST
+	cout << "ERASING NODE WITH KEY 12" << endl;
+	cout << map.count(12) << endl;
+	cout << "COUNTING NODE WITH KEY 12 - SHOULD BE 0" << endl;
+	cout << map.size() << endl; //SIZE TEST
+	cout << "GETTING NEW MAP SIZE, SHOULD BE 3" << endl;
 	
-	t.tree_walk(t.root);
-	t.tree_delete(c);
-	cout << "walking again" << endl;
-	t.tree_walk(t.root);
+	Map<int,int> map2 = map; //ASSIGNMENT TEST
+	cout << "ASSIGNING MAP2 TO MAP" << endl;
+	cout << map2.size() << endl; //SIZE TEST
+	cout << "CHECKING MAP2 SIZE, SHOULD BE 3" <<endl;
+	cout << map2.count(13) << endl;
+	cout << "COUNTING ELM WITH KEY 13" << endl;
+
 
 	return 0;
 }

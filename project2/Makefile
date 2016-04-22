@@ -1,5 +1,5 @@
 all:
-	g++ -std=c++11 main.cpp BST.h -o run_this
+	g++ -std=c++11 main.cpp BST.h Map.h -o run_this
 
 clean:
 	rm -rf *.o *.gch

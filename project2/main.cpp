@@ -27,6 +27,18 @@ int main(){
 	cout << map2.count(13) << endl;
 	cout << "COUNTING ELM WITH KEY 13" << endl;
 
+	Map<int,int> mapA; //SWAP Test
+	mapA.insert(make_pair(99, 1)); //INSERT TEST
+	mapA.insert(make_pair(98, 1));
+	mapA.insert(make_pair(97, 1));
+	mapA.insert(make_pair(96, 1));
+	
+	Map<int,int> mapB; //SWAP Test
+	mapB.insert(make_pair(55, 1)); //INSERT TEST
+	mapB.insert(make_pair(10101, 1));
+	
+	mapB.delete_me();
+	cout << mapB.count(55) << endl;
 
 	return 0;
 }

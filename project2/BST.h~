@@ -129,7 +129,15 @@ class BST {
 			} else if(z->right == NULL) {
 				transplant(z,z->left);
 			} else {
-				
+				Node<K,V> *y = tree_minimum(z->right);
+				if(y->parent != z){
+					transplant(y,y->right);
+					y->right = z->right;
+					(y->right)->parent = y;
+				}
+				transplant(z,y);
+				y->left = z->left;
+				(y->left)->parent = y;
 			}
 		}
 

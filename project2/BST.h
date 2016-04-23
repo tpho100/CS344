@@ -35,6 +35,14 @@ class BST {
 		~BST<K,V>() {
 		}
 		
+		void destroy_tree(Node<K,V> *leaf){
+			if( leaf != 0 ){
+				destroy_tree(leaf->left);
+				destroy_tree(leaf->right);
+				free(leaf);
+			}
+		}
+		
 		void tree_walk(Node<K,V> *x){
 			if(x != NULL ){	
 				tree_walk(x->left);

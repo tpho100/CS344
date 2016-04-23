@@ -3,12 +3,20 @@
 
 #include "BST.h"
 #include <utility>
+#include "MapIterator.h"
 
 template<typename K,typename V>
 class Map {
+	
+	//friend class MapIterator<K,V>;	
+	
 	private:
 		BST<K,V> bst;
 		int SIZE;
+		
+		BST<K,V> getBST(){
+			return bst;
+		}
 		
 	public:
 		Map<K,V>(){//default constructor
@@ -21,7 +29,7 @@ class Map {
 			this->SIZE = map.size();
 		}
 
-		Map<K,V> & operator=(Map<K,V> & temp){
+		Map<K,V> & operator=(Map<K,V> & temp){ //assignment operator
 			if(this != &temp){
 				this->bst = temp.getBST();
 				this->SIZE = temp.size();
@@ -33,10 +41,6 @@ class Map {
 			//I have no dynamic memory allocation going on...
 		}
 		
-		BST<K,V> getBST(){
-			return bst;
-		}
-		
 		int size(){
 			return SIZE;
 		}
@@ -46,6 +50,21 @@ class Map {
 				return false;
 			}
 			return true;
+		}
+
+		void swap(Map<K,V> & map){
+			BST<K,V> temp = bst;
+			int tempSize = SIZE;
+
+			this->bst = map.getBST();
+			this->SIZE = map.size();
+			map.bst = temp;
+			map.SIZE = tempSize;
+		}
+		
+		void delete_me(){
+			bst.destroy_tree(bst.root);
+			SIZE = 0;
 		}
 		
 		Node<K,V>* begin(){ //Returns node to first element which is the lowest key

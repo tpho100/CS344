@@ -37,7 +37,7 @@ int main(){
 	mapB.insert(make_pair(55, 1)); //INSERT TEST
 	mapB.insert(make_pair(10101, 1));
 	
-	mapB.delete_me();
+	mapB.clear();
 	cout << mapB.count(55) << endl;
 
 	return 0;
